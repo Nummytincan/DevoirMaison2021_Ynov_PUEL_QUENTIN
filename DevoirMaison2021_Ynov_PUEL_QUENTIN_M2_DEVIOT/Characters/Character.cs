@@ -4,30 +4,45 @@ using System.Text;
 
 namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 {
-
+    /**
+     * 
+     * @author Quentin Puel
+     */
     public abstract class Character
     {
         #region Raw Attribut
         //Attack, Defense, AttackSpeed, Damages,MaximumLife, CurrentLife, PowerSpeed.
-        public string Name { get; set; }
-        public int Attack { get; set; }
-        public int Defense { get; set; }
-        public int Damages { get; set; }
-        public int MaximumLife { get; }
-        public int CurrentLife { get; set; }
-        public float PowerSpeed { get; set; }
-        public float AttackSpeed { get; set; }
+        public abstract string Name { get; set; }
+        public abstract  int Attack { get; set; }
+        public abstract int Defense { get; set; }
+        public abstract int Damages { get; set; }
+        public abstract int MaximumLife { get; }
+        public abstract int CurrentLife { get; set; }
+        public abstract float PowerSpeed { get; set; }
+        public abstract float AttackSpeed { get; set; }
         #endregion
 
-        public HashSet<Character> enemies { get; set; }
+        public abstract HashSet<Character> enemies { get; set; }
 
+        
         #region Specs relative to type
+        /**
+         * Chaque personnages ont un pouvoir spécifique à leur class 
+         * @author Quentin Puel
+         */
         public abstract void Power();
-
+        /**
+         * Chaque personnages ont un passif spécifique à leur class 
+         * @author Quentin Puel
+         */
         public abstract void Passive();
         #endregion
 
         #region Specs relative to combat
+        /**
+         * Calcul de l'initiative d'un personnage
+         * @author Quentin Puel
+         */
         public int Initiative()
         {
             var rand = new Random().Next(1, 100);
@@ -36,6 +51,10 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             
         }
 
+        /**
+         * 
+         * @author Quentin Puel
+         */
         public void AttackTarget(Character target) {
             if (AttackSuccess(target))
             {
@@ -45,8 +64,8 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 
         /**
          * Vérification de la marge d'attaque suppérieur à zero.
-         * en faisant la soustraction de la défense de la cible
-         * à l'attaque du précurseur
+         * si > 0, ça touche 
+         * sinon, ça rate
          * @author Puel Quentin
          */
         public bool AttackSuccess(Character target)
@@ -63,12 +82,20 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             }
         }
 
+        /**
+         * Calcul la marge d'attaque néccessaire,en faisant la soustraction de la défense de la cible
+         * à l'attaque du précurseur
+         * @author Quentin Puel
+         */
         public int MargeAttack(Character target)
         {
-            return target.Defense - this.Attack;
+            return  this.Attack - target.Defense ;
         }
-
-        public void DealDamage(Character target) {
+        /**
+         * 
+         * @author Quentin Puel
+         */
+        public virtual void DealDamage(Character target) {
             target.CurrentLife = MargeAttack(target) * Damages / 100;
         }
         #endregion

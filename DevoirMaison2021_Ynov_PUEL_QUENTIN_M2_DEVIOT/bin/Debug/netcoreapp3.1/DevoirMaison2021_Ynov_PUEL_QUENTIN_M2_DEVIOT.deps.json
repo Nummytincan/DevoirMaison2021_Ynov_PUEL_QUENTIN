@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT/1.0.0": {
+        "runtime": {
+          "DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

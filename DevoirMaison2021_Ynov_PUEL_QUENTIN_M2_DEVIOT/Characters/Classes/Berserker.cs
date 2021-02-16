@@ -8,17 +8,17 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
     {
         #region Raw Attribut
         //Attack, Defense, AttackSpeed, Damages,MaximumLife, CurrentLife, PowerSpeed.
-        public string Name { get; set; }
-        public int Attack { get; set; }
-        public int Defense { get; set; }
-        public int Damages { get; set; }
-        public int MaximumLife { get;}
-        public int CurrentLife { get; set; }
-        public float PowerSpeed { get; set; }
-        public float AttackSpeed { get; set; }
+        public override string Name { get; set; }
+        public override int Attack { get; set; }
+        public override int Defense { get; set; }
+        public override int Damages { get; set; }
+        public override int MaximumLife { get;}
+        public override int CurrentLife { get; set; }
+        public override float PowerSpeed { get; set; }
+        public override float AttackSpeed { get; set; }
         #endregion
 
-        public HashSet<Character> enemies { get; set; }
+        public override HashSet<Character> enemies { get; set; }
 
         #region Death event
 
