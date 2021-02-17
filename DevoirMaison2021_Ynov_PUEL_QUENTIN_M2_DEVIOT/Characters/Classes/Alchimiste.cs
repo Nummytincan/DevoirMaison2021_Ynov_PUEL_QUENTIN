@@ -29,5 +29,15 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
         {
             throw new NotImplementedException();
         }
+        public Alchimiste(string name) {
+            Name = name;
+            Attack = 50;
+            Defense = 50;
+            AttackSpeed = 1.0f;
+            Damages = 30;
+            MaximumLife = 150;
+            CurrentLife = 150;
+            PowerSpeed = 0.1f;
+        }
     }
 }

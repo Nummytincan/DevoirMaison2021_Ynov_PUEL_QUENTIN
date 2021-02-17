@@ -4,6 +4,10 @@ using System.Text;
 
 namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
 {
+    /**
+     * 
+     * @author Puel Quentin
+     */
     public class Assassin : Character
     {
         #region Raw Attribut
@@ -28,6 +32,16 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
         public override void Power()
         {
             throw new NotImplementedException();
+        }
+        public Assassin(string name) {
+            Name = name;
+            Attack = 150;
+            Defense = 100;
+            AttackSpeed = 1.0f;
+            Damages = 100;
+            MaximumLife = 185;
+            CurrentLife = 185;
+            PowerSpeed = 0.5f;
         }
     }
 }

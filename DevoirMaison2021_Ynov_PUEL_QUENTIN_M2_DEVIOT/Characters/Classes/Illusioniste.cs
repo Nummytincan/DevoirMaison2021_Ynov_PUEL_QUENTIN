@@ -4,6 +4,10 @@ using System.Text;
 
 namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
 {
+    /**
+     * 
+     * @author Puel Quentin
+     */
     public class Illusioniste : Character
     {
         #region Raw Attribut
@@ -28,6 +32,17 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
         public override void Power()
         {
             throw new NotImplementedException();
+        }
+
+        public Illusioniste(string name) {
+            Name = name;
+            Attack = 75;
+            Defense = 75;
+            AttackSpeed = 1.0f;
+            Damages = 50;
+            MaximumLife = 100;
+            CurrentLife = 100;
+            PowerSpeed = 0.5f;
         }
     }
 }

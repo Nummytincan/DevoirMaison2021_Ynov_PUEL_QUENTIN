@@ -27,7 +27,19 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
 
         public override void Power()
         {
-            throw new NotImplementedException();
+            var regen = MaximumLife * 0.1;
+            CurrentLife += (int)regen;
+        }
+        public Pretre(string name)
+        {
+            Name = name;
+            Attack = 100;
+            Defense = 125;
+            AttackSpeed = 1.5f;
+            Damages = 90;
+            MaximumLife = 150;
+            CurrentLife = 150;
+            PowerSpeed = 1.0f;
         }
     }
 }

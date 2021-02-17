@@ -29,5 +29,16 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
         {
             throw new NotImplementedException();
         }
+
+        public Magicien(string name) {
+            Name = name;
+            Attack = 75;
+            Defense = 125;
+            AttackSpeed = 1.5f;
+            Damages = 100;
+            MaximumLife = 125;
+            CurrentLife = 125;
+            PowerSpeed = 0.1f;
+        }
     }
 }

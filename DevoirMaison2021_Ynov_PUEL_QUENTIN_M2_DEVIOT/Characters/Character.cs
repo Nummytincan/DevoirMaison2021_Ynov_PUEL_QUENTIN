@@ -25,6 +25,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         public abstract HashSet<Character> enemies { get; set; }
 
         
+        
         #region Specs relative to type
         /**
          * Chaque personnages ont un pouvoir spécifique à leur class 
@@ -47,6 +48,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         {
             var rand = new Random().Next(1, 100);
             var init = (1000 / AttackSpeed) - rand;
+            Console.WriteLine("{0} a fait {1} au jet d'initiative", Name, init);
             return (int)init;
             
         }

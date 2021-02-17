@@ -4,6 +4,10 @@ using System.Text;
 
 namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 {
+    /**
+     * 
+     * @author Puel Quentin
+     */
     public class Guerrier : Character
     {
         #region Raw Attribut

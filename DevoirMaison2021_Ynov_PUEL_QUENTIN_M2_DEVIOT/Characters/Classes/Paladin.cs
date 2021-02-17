@@ -44,9 +44,14 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 
         public override void DealDamage(Character target)
         {
-            if (target is IUndead) {
+            if (target is IUndead)
+            {
                 Console.WriteLine("{0}", MargeAttack(target) * Damages * 2 / 100);
                 //target.CurrentLife = MargeAttack(target) * Damages * 2 / 100;
+            }
+            else
+            {
+                Console.WriteLine("{0}", MargeAttack(target) * Damages / 100);
             }
         }
     }

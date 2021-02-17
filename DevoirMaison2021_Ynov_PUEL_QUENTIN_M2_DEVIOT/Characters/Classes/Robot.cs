@@ -29,5 +29,15 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         {
             throw new NotImplementedException();
         }
+        public Robot(string name) {
+            Name = name;
+            Attack = 25;
+            Defense = 100;
+            AttackSpeed = 1.2f;
+            Damages = 50;
+            MaximumLife = 275;
+            CurrentLife = 275;
+            PowerSpeed = 0.5f;
+        }
     }
 }
