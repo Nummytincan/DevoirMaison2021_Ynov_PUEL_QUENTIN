@@ -18,7 +18,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         public override int CurrentLife { get; set; }
         public override float PowerSpeed { get; set; }
         public override float AttackSpeed { get; set; }
-
+        public override int Init { get; set; }
         public override FightManager fightManager { get; set; }
         #endregion
 
