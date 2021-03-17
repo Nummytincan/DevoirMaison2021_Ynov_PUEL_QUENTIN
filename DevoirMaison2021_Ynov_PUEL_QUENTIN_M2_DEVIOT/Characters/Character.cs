@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 {
@@ -20,8 +22,12 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         public abstract int CurrentLife { get; set; }
         public abstract float PowerSpeed { get; set; }
         public abstract float AttackSpeed { get; set; }
+        public abstract int Init { get; set; }
+       
+        
+        public abstract FightManager fightManager { get; set; }
         #endregion
-
+        //Potential target of the character
         public abstract HashSet<Character> enemies { get; set; }
 
         
@@ -44,17 +50,20 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
          * Calcul de l'initiative d'un personnage
          * @author Quentin Puel
          */
-        public int Initiative()
+        public void Initiative()
         {
             var rand = new Random().Next(1, 100);
             var init = (1000 / AttackSpeed) - rand;
             Console.WriteLine("{0} a fait {1} au jet d'initiative", Name, init);
-            return (int)init;
+            this.Init = (int)init;
             
         }
 
+        
+
         /**
-         * 
+         * Attack the target character
+         * @param Character target
          * @author Quentin Puel
          */
         public void AttackTarget(Character target) {
@@ -62,12 +71,21 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             {
                 DealDamage(target);
             }
+            else {
+                GetCounteredFromTarget(target);
+            }
+        }
+
+        private void GetCounteredFromTarget(Character target)
+        {
+            this.CurrentLife -= MargeAttack(target);
         }
 
         /**
          * Vérification de la marge d'attaque suppérieur à zero.
          * si > 0, ça touche 
          * sinon, ça rate
+         * @param Character target
          * @author Puel Quentin
          */
         public bool AttackSuccess(Character target)
@@ -87,6 +105,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         /**
          * Calcul la marge d'attaque néccessaire,en faisant la soustraction de la défense de la cible
          * à l'attaque du précurseur
+         * @param Character target
          * @author Quentin Puel
          */
         public int MargeAttack(Character target)
@@ -94,11 +113,21 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             return  this.Attack - target.Defense ;
         }
         /**
-         * 
+         * Apply Damage on target current life
+         * @param Character target
          * @author Quentin Puel
          */
         public virtual void DealDamage(Character target) {
             target.CurrentLife = MargeAttack(target) * Damages / 100;
+        }
+
+        public void Reset() {
+            CurrentLife = MaximumLife;
+        }
+
+        public void SetFightManager(FightManager fightManager)
+        {
+            this.fightManager = fightManager;
         }
         #endregion
     }

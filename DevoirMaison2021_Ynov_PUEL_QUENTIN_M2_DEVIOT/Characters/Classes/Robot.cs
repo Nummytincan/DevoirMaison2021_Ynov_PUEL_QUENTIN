@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,6 +17,8 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         public override int CurrentLife { get; set; }
         public override float PowerSpeed { get; set; }
         public override float AttackSpeed { get; set; }
+
+        public override FightManager fightManager { get; set; }
         #endregion
 
         public override HashSet<Character> enemies { get; set; }
