@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
@@ -53,10 +54,14 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
 
         private void StartFight()
         {
+            //Reset des personnages
+            ResetAll();
+
             //boucle de calcule pour l'initiative
-            foreach
+            ComputeInit();
 
             //trie du tableau en fonction de l'initiative
+            OrderTabByInit();
 
             //boucle pour chaque personnage
                 //select random target
@@ -65,6 +70,26 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
             // mort++
 
             throw new NotImplementedException();
+        }
+
+        private void OrderTabByInit()
+        {
+            charactersList = charactersList.OrderByDescending(personnage => personnage.Init).ToList();
+        }
+
+        private void ComputeInit()
+        {
+            foreach (Character p in charactersList) {
+                p.Initiative();
+            }
+        }
+
+        private void ResetAll()
+        {
+            foreach(Character p in charactersList)
+            {
+                p.Reset();
+            }
         }
 
         void ManageVictory()
