@@ -37,5 +37,18 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         {
             throw new NotImplementedException();
         }
+
+        public Guerrier(string name) {
+            Name = name;
+            Attack = 50;
+            Defense = 50;
+            AttackSpeed = 1.1f;
+            Damages = 20;
+            MaximumLife = 400;
+            CurrentLife = 400;
+            PowerSpeed = 1f;
+            Rand = new Random();
+            //TODO
+        }
     }
 }

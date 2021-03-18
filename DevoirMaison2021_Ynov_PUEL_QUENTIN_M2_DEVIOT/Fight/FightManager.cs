@@ -44,6 +44,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
                 if (fightEnded)
                 {
                     Console.WriteLine("salut");
+                    
                     return;
                 }
             }
@@ -70,23 +71,39 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
                 //trie du tableau en fonction de l'initiative
                 OrderTabByInit();
                 MyLog(" TRIE ");
-                Console.ReadLine();
+                
             }
 
 
             //boucle pour chaque personnage
             for (int i = PlayingPlayerIndex; i < charactersList.Count; i++) {
-                //select random target
-                //deal damage
+                if (charactersList[i].CurrentLife > 0) {
+                    //select random target
+                    charactersList[i].SelectTargetAndAttack();
+                }
             }
 
             //trie des morts
+            DeadFlush();
             // mort++
-
-
+            round++;
+            MyLog("------------------FINAttack-------------------- ");
+            MyLog("------------------Round "+round+"-------------------- ");
+            MyLog("------------------"+charactersList.Count+" -------------------- ");
+            PlayingPlayerIndex = -2;
         }
 
-
+        private void DeadFlush()
+        {
+            for (int i = charactersList.Count - 1; i >= 0; i--)
+            {
+                Character currentPersonnage = charactersList[i];
+                if (currentPersonnage.CurrentLife <= 0)
+                {
+                    charactersList.Remove(currentPersonnage); 
+                }
+            }
+        }
 
         private void OrderTabByInit()
         {

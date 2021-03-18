@@ -43,6 +43,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             MaximumLife = 275;
             CurrentLife = 275;
             PowerSpeed = 0.5f;
+            Rand = new Random();
         }
     }
 }

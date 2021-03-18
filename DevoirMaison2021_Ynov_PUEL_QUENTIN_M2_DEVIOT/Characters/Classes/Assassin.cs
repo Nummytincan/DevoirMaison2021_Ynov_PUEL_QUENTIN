@@ -46,6 +46,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
             MaximumLife = 185;
             CurrentLife = 185;
             PowerSpeed = 0.5f;
+            Rand = new Random();
         }
     }
 }

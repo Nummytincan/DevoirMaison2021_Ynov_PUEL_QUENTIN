@@ -44,18 +44,19 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             MaximumLife = 250;
             CurrentLife = 250;
             PowerSpeed = 0.5f;
+            Rand = new Random();
         }
 
         public override void DealDamage(Character target)
         {
             if (target is IUndead)
             {
-                Console.WriteLine("{0}", MargeAttack(target) * Damages * 2 / 100);
+                target.CurrentLife -= MargeAttack(target) * Damages * 2 / 100;
                 //target.CurrentLife = MargeAttack(target) * Damages * 2 / 100;
             }
             else
             {
-                Console.WriteLine("{0}", MargeAttack(target) * Damages / 100);
+                base.DealDamage(target);
             }
         }
     }

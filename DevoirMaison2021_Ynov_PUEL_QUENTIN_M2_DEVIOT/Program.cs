@@ -26,6 +26,8 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             fightManager = new FightManager(characters);
             fightManager.StartCombat();
 
+            Console.ReadLine();
+
 
 
         }

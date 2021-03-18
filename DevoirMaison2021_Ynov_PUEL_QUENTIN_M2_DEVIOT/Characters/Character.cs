@@ -69,16 +69,23 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         public void AttackTarget(Character target) {
             if (AttackSuccess(target))
             {
+                Console.WriteLine("Avant Vie : {0}", target.CurrentLife);
                 DealDamage(target);
+                Console.WriteLine("Cible : {0}", target.Name);
+                Console.WriteLine("Vie : {0}", target.CurrentLife);
             }
             else {
+                
+                Console.WriteLine("Avant Vie : {0}", CurrentLife);
                 GetCounteredFromTarget(target);
+                Console.WriteLine(" {0} se fait contre attaquer", Name);
+                Console.WriteLine("Vie : {0}", CurrentLife);
             }
         }
 
         private void GetCounteredFromTarget(Character target)
         {
-            this.CurrentLife -= MargeAttack(target);
+            this.CurrentLife += MargeAttack(target);
         }
 
         /**
@@ -92,12 +99,13 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         {
             if ( MargeAttack(target) > 0) // la marge d'attaque est > 0 donc attaque réussie
             {
-                Console.WriteLine("{0} réussie son attaque ! ", Name);
+                Console.WriteLine("{0} réussie son attaque ! MA : {1} ", Name,MargeAttack(target));
+                
                 return true;
             }
             else 
             {
-                Console.WriteLine("{0} a échoué son attaque ! ", Name);
+                Console.WriteLine("{0} a échoué son attaque ! MA : {1} ", Name, MargeAttack(target));
                 return false;
             }
         }
@@ -118,7 +126,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
          * @author Quentin Puel
          */
         public virtual void DealDamage(Character target) {
-            target.CurrentLife = MargeAttack(target) * Damages / 100;
+            target.CurrentLife -= MargeAttack(target) * Damages / 100;
         }
 
         public virtual void SelectTargetAndAttack()
@@ -133,7 +141,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
                 if (currentCharacter != this && currentCharacter.CurrentLife > 0)
                 {
                     //on l'ajoute à la liste des cible valide
-                    enemies.Add(currentCharacter);
+                    validTarget.Add(currentCharacter);
                 }
             }
 
@@ -153,6 +161,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 
         public void Reset() {
             CurrentLife = MaximumLife;
+            
         }
 
         public void SetFightManager(FightManager fightManager)
