@@ -23,12 +23,13 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         public abstract float PowerSpeed { get; set; }
         public abstract float AttackSpeed { get; set; }
         public abstract int Init { get; set; }
-       
-        
+        public abstract Random Rand { get; set; }
+
+
         public abstract FightManager fightManager { get; set; }
         #endregion
         //Potential target of the character
-        public abstract HashSet<Character> enemies { get; set; }
+        public abstract List<Character> enemies { get; set; }
 
         
         
@@ -53,8 +54,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         public void Initiative()
         {
             var rand = new Random().Next(1, 100);
-            var init = (1000 / AttackSpeed) - rand;
-            Console.WriteLine("{0} a fait {1} au jet d'initiative", Name, init);
+            var init = (1000 / AttackSpeed) - rand;           
             this.Init = (int)init;
             
         }
@@ -119,6 +119,36 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
          */
         public virtual void DealDamage(Character target) {
             target.CurrentLife = MargeAttack(target) * Damages / 100;
+        }
+
+        public virtual void SelectTargetAndAttack()
+        {
+            //on cree une liste dans laquelle on stockera les cibles valides
+            List<Character> validTarget = new List<Character>();
+            
+            for (int i = 0; i < fightManager.charactersList.Count; i++)
+            {
+                Character currentCharacter = fightManager.charactersList[i];
+                //si le personnage testé n'est pas celui qui attaque et qu'il est vivant
+                if (currentCharacter != this && currentCharacter.CurrentLife > 0)
+                {
+                    //on l'ajoute à la liste des cible valide
+                    enemies.Add(currentCharacter);
+                }
+            }
+
+            if (validTarget.Count > 0)
+            {
+
+                //on prend un personngae au hasard dans la liste des cibles valides et on le designe comme la cible de l'attaque 
+                Character target = validTarget[Rand.Next(0, validTarget.Count)];
+                AttackTarget(target);
+            }
+            else
+            {
+                //MyLog(Name + " n'a pas trouvé de cible valide");
+                
+            }
         }
 
         public void Reset() {

@@ -31,17 +31,16 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
             round = 1;
             StartNumberFighter = charactersList.Count;
             //faire en sorte que les personnages ne soient pas blessé avant le début du combat
-            foreach (Character personnage in charactersList)
-            {
-                personnage.Reset();
-            }
+            //Reset des personnages
+            ResetAll();
+            MyLog(" RESET Fait ");
             MyLog("----- Debut du combat -----");
             //a commenter pour enchainer les rounds à la main
             //faire des rounds tant qu'il y a plus d'un combattant vivant
             while (charactersList.Count > 1)
             {
                 //commence le combat entre personnages
-                StartFight();
+                Fight();
                 if (fightEnded)
                 {
                     Console.WriteLine("salut");
@@ -52,25 +51,42 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
             ManageVictory();
         }
 
-        private void StartFight()
+        private void Fight(int playingPlayerIndex = -2)
         {
-            //Reset des personnages
-            ResetAll();
+            PlayingPlayerIndex = playingPlayerIndex; // permets de savoir si le fight vient de commencer
 
-            //boucle de calcule pour l'initiative
-            ComputeInit();
+            if (PlayingPlayerIndex == -2) {
+                PlayingPlayerIndex++;
+                MyLog("------------------Attack-------------------- ");
+                    
+            }
 
-            //trie du tableau en fonction de l'initiative
-            OrderTabByInit();
+            if (PlayingPlayerIndex == -1) {
+                PlayingPlayerIndex++;
+                MyLog(" INIT ");
+                //boucle de calcule pour l'initiative
+                ComputeInit();
+                
+                //trie du tableau en fonction de l'initiative
+                OrderTabByInit();
+                MyLog(" TRIE ");
+                Console.ReadLine();
+            }
+
 
             //boucle pour chaque personnage
+            for (int i = PlayingPlayerIndex; i < charactersList.Count; i++) {
                 //select random target
                 //deal damage
+            }
+
             //trie des morts
             // mort++
 
-            throw new NotImplementedException();
+
         }
+
+
 
         private void OrderTabByInit()
         {
@@ -81,6 +97,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
         {
             foreach (Character p in charactersList) {
                 p.Initiative();
+                MyLog(" "+ p.Name+" Initiative : " + p.Init);
             }
         }
 

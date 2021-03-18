@@ -20,9 +20,10 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         public override float AttackSpeed { get; set; }
         public override FightManager fightManager { get; set; }
         public override int Init { get; set; }
+        public override Random Rand { get; set; }
         #endregion
 
-        public override HashSet<Character> enemies { get; set; }
+        public override List<Character> enemies { get; set; }
 
         public override void Passive()
         {
