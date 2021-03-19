@@ -33,7 +33,15 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
         public override void Power()
         {
             var regen = MaximumLife * 0.1;
-            CurrentLife += (int)regen;
+            if (MaximumLife - CurrentLife <= regen)
+            {
+                CurrentLife += (int)regen;
+            }
+            else {
+                CurrentLife = MaximumLife;
+            }
+
+            
         }
         public Pretre(string name)
         {
@@ -47,16 +55,16 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
             PowerSpeed = 1.0f;
             Rand = new Random();
         }
-        public override void DealDamage(Character target)
+        public override void DealDamage(Character target, int ma)
         {
             if (target is IUndead)
             {
-                target.CurrentLife -= MargeAttack(target) * Damages * 2 / 100;
+                target.CurrentLife -= ma * Damages * 2 / 100;
                 //target.CurrentLife = MargeAttack(target) * Damages * 2 / 100;
             }
             else
             {
-                base.DealDamage(target);
+                base.DealDamage(target, ma);
             }
         }
     }

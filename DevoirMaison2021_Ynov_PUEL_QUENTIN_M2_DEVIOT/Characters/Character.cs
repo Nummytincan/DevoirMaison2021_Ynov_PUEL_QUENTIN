@@ -54,12 +54,12 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         public void Initiative()
         {
             
-            var init = (1000 / AttackSpeed) - RollDice();           
+            var init = (1000 / AttackSpeed) + RollDice();           
             this.Init = (int)init;
             
         }
         public virtual int RollDice() {
-            var rand = new Random().Next(1, 100);
+            var rand = new Random().Next(0, 100);
             return rand;
         }
         
@@ -70,21 +70,18 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
          * @author Quentin Puel
          */
         public void AttackTarget(Character target) {
-            if (AttackSuccess(target))
+            var i = MargeAttack(target);
+            if (AttackSuccess(i))
             {
                 Console.WriteLine("Avant Vie : {0}", target.CurrentLife);
-                DealDamage(target);
+                DealDamage(target,i);
                 Console.WriteLine("Cible : {0}", target.Name);
                 Console.WriteLine("Vie : {0}", target.CurrentLife);
             }
             
         }
 
-        private void GetCounteredFromTarget(Character target)
-        {
-            this.CurrentLife += MargeAttack(target);
-        }
-
+        
         /**
          * Vérification de la marge d'attaque suppérieur à zero.
          * si > 0, ça touche 
@@ -92,17 +89,17 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
          * @param Character target
          * @author Puel Quentin
          */
-        public bool AttackSuccess(Character target)
+        public bool AttackSuccess(int ma)
         {
-            if ( MargeAttack(target) > 0) // la marge d'attaque est > 0 donc attaque réussie
+            if ( ma > 0) // la marge d'attaque est > 0 donc attaque réussie
             {
-                Console.WriteLine("{0} réussie son attaque ! MA : {1} ", Name,MargeAttack(target));
+                Console.WriteLine("{0} réussie son attaque ! MA : {1} ", Name,ma);
                 
                 return true;
             }
             else 
             {
-                Console.WriteLine("{0} a échoué son attaque ! MA : {1} ", Name, MargeAttack(target));
+                Console.WriteLine("{0} a échoué son attaque ! MA : {1} ", Name, ma);
                 return false;
             }
         }
@@ -114,16 +111,20 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
          * @author Quentin Puel
          */
         public int MargeAttack(Character target)
-        {
-            return  this.Attack - target.Defense + RollDice();
+        { 
+            var i = Attack - target.Defense + RollDice();
+            Console.WriteLine(i + "MA");
+           
+            return i ;
         }
         /**
          * Apply Damage on target current life
          * @param Character target
          * @author Quentin Puel
          */
-        public virtual void DealDamage(Character target) {
-            target.CurrentLife -= MargeAttack(target) * Damages / 100;
+        public virtual void DealDamage(Character target, int ma) {
+            Console.WriteLine(ma * Damages / 100 + "D");
+            target.CurrentLife -= ma * Damages / 100;
         }
 
         public virtual void SelectTargetAndAttack()

@@ -22,6 +22,8 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
                 new Necromancien("tata"),
                 new Paladin("tutu"),
                 new Zombie("titi"),
+                new Robot("R"),
+                new Pretre("P")
             };
             fightManager = new FightManager(characters);
             fightManager.StartCombat();
