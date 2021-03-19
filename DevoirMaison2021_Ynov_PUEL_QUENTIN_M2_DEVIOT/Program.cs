@@ -33,5 +33,25 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 
 
         }
+
+        /**
+         * TODO Simulations de combats différentes en parallele
+         * Par manque de temps, je n'ai pas eu le temps de les faire
+         * J'ai été en arret maladie pendant 2 semaines
+         */
+        static void Sim1() {
+            
+        }
+
+        static void Sim2()
+        {
+             
+        }
+
+        static void Sim3()
+        {
+
+        }
     }
+
 }

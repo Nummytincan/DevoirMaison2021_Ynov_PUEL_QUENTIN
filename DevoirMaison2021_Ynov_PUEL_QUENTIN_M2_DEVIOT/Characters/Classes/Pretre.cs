@@ -71,5 +71,36 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
                 base.DealDamage(target, ma);
             }
         }
+
+        /**
+         * TODO Ciblage des morts vivant en premiers
+         */
+        public override void SelectTargetAndAttack()
+        {
+            List<Character> validTarget = new List<Character>();
+
+            for (int i = 0; i < fightManager.aliveCharactersList.Count; i++)
+            {
+                Character currentCharacter = fightManager.aliveCharactersList[i];
+                //si le personnage testé n'est pas celui qui attaque et qu'il est vivant
+                if (currentCharacter != this && currentCharacter.CurrentLife > 0)
+                {
+                    //on l'ajoute à la liste des cible valide
+                    validTarget.Add(currentCharacter);
+                }
+            }
+            //count undead
+
+            //TODO Trie de la liste en mettant les undead en premiers
+
+            if (validTarget.Count > 0)
+            {
+
+                //on prend un personngae au hasard dans la liste des cibles valides et on le designe comme la cible de l'attaque 
+
+                Character target = validTarget[Rand.Next(0, validTarget.Count)]; // A remplacer Rand(0,nbUndead)
+                AttackTarget(target);
+            }
+        }
     }
 }

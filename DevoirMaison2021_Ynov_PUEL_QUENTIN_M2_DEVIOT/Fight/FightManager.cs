@@ -10,6 +10,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
     {
         public List<Character> aliveCharactersList = new List<Character>();
         public List<Character> deadCharactersList = new List<Character>();
+        public List<Character> invisibleCharactersList = new List<Character>();
         public int round = 0;
         public DateTime startTime;
         public int StartNumberFighter = 0;
@@ -19,7 +20,21 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
 
         public FightManager(List<Character> charactersList, int round = 0)
         {
-            this.aliveCharactersList = charactersList;
+            // trie des personnes invisible dans une liste séparée
+            foreach (Character p in charactersList) {
+                if (p is Necromancien)
+                {
+                    invisibleCharactersList.Add(p);
+                }
+                else if (p is Assassin)
+                {
+                    invisibleCharactersList.Add(p);
+                }
+                else {
+                    aliveCharactersList.Add(p);
+                }
+            }
+            //this.aliveCharactersList = charactersList;
             this.round = round;
             foreach (Character character in charactersList)
             {

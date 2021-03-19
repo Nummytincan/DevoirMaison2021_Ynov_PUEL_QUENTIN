@@ -151,11 +151,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
                 Character target = validTarget[Rand.Next(0, validTarget.Count)];
                 AttackTarget(target);
             }
-            else
-            {
-                //MyLog(Name + " n'a pas trouvé de cible valide");
-                
-            }
+            
         }
 
         public void Reset() {
