@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -78,12 +79,28 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
 
             //boucle pour chaque personnage
             for (int i = PlayingPlayerIndex; i < aliveCharactersList.Count; i++) {
+                if (aliveCharactersList[i].Poison > 0) {
+                    aliveCharactersList[i].CurrentLife -= aliveCharactersList[i].Poison;
+
+                    MyLog(aliveCharactersList[i].Name + " est empoisonnée "+ aliveCharactersList[i].Poison);
+                }
                 if (aliveCharactersList[i].CurrentLife > 0) {
                     //select random target
                     aliveCharactersList[i].SelectTargetAndAttack();
                     if (deadCharactersList.Count > 0 && aliveCharactersList[i] is Zombie) {
+                        MyLog("Zombie dévore un cadavre");
                         aliveCharactersList[i].Power();
                     }
+
+                    if (aliveCharactersList[i].CurrentLife < aliveCharactersList[i].MaximumLife && aliveCharactersList[i] is Pretre) {
+                        aliveCharactersList[i].Power();
+                    }
+
+                    if (aliveCharactersList[i] is Robot && round % 2 == 0) {
+                        MyLog("Robot prends de la vitesse");
+                        aliveCharactersList[i].Power();
+                    }
+
                 }
             }
 

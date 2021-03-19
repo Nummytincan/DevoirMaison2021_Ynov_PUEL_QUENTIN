@@ -32,16 +32,20 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
 
         public override void Power()
         {
+            Console.WriteLine("AvHeal " + CurrentLife);
             var regen = MaximumLife * 0.1;
             if (MaximumLife - CurrentLife <= regen)
             {
                 CurrentLife += (int)regen;
+                Console.WriteLine("Le pretre se heal de " + regen);
             }
             else {
                 CurrentLife = MaximumLife;
+                
             }
+           
+            Console.WriteLine("ApHeal " + CurrentLife);
 
-            
         }
         public Pretre(string name)
         {

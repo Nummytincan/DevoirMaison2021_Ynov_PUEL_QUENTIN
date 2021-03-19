@@ -1,11 +1,12 @@
-﻿using DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight;
+﻿using DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters;
+using DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 {
-    public class Robot : Character
+    public class Robot : Character,IImune
     {
         #region Raw Attribut
         //Attack, Defense, AttackSpeed, Damages,MaximumLife, CurrentLife, PowerSpeed.
@@ -27,12 +28,12 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 
         public override void Passive()
         {
-            throw new NotImplementedException();
+            //SEE Rolldice override
         }
 
         public override void Power()
         {
-            throw new NotImplementedException();
+            AttackSpeed *= 1.5f;
         }
         public Robot(string name) {
             Name = name;

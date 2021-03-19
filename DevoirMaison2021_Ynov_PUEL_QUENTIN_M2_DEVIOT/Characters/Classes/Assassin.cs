@@ -47,6 +47,22 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
             CurrentLife = 185;
             PowerSpeed = 0.5f;
             Rand = new Random();
+            
+        }
+        public override void DealDamage(Character target, int ma)
+        {
+            if (target is IImune)
+            {
+                var damage = ma * Damages * 2 / 100;
+                target.CurrentLife -= damage / 2; // Ne prends pas de dégats de poison
+                
+            }
+            else
+            {
+                var damage = ma * Damages * 2 / 100;
+                target.CurrentLife -= damage / 2;
+                target.Poison += damage / 2;
+            }
         }
     }
 }

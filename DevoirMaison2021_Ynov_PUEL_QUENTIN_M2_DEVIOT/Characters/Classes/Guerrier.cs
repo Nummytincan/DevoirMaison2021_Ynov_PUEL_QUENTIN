@@ -35,19 +35,11 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 
         public override void Power()
         {
-            //si endessous de 200 pdv 
-            if (CurrentLife <= 200) {
-                // get différence entre maxlife et current life /2 et modif attack et dammage 
-                Attack += GetDiffMaxCurrent();
-                Damages += GetDiffMaxCurrent();
-            }
+            AttackSpeed += 0.3f;
 
         }
 
-        private int GetDiffMaxCurrent()
-        {
-            return (int)(MaximumLife - CurrentLife / 2);
-        }
+        
 
         public Guerrier(string name) {
             Name = name;

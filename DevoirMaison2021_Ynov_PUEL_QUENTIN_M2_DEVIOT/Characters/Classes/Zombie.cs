@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 {
-    public class Zombie : Character, IUndead
+    public class Zombie : Character, IUndead, IImune
     {
         #region Raw Attribut
         //Attack, Defense, AttackSpeed, Damages,MaximumLife, CurrentLife, PowerSpeed.
@@ -34,6 +34,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         {
             if (CurrentLife < MaximumLife) {
                 EatCorpse(fightManager.deadCharactersList[0]);
+                fightManager.deadCharactersList.Remove(fightManager.deadCharactersList[0]);
             }
             
         }
@@ -52,6 +53,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         }
 
         public void EatCorpse(Character c) {
+            Console.WriteLine(CurrentLife+"AVHEAL");
             if (CurrentLife + c.MaximumLife / 100 > MaximumLife)
             {
                 CurrentLife = MaximumLife;
@@ -59,7 +61,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             else { 
                 this.CurrentLife += c.MaximumLife / 100;       
             }
-             
+            Console.WriteLine(CurrentLife + "HEAL");
         }
     }
 }

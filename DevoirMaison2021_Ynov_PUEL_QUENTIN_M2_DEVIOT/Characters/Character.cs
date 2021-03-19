@@ -30,9 +30,10 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         #endregion
         //Potential target of the character
         public abstract List<Character> enemies { get; set; }
+        public int Poison { get;  set; }
 
-        
-        
+
+
         #region Specs relative to type
         /**
          * Chaque personnages ont un pouvoir spécifique à leur class 
