@@ -32,7 +32,10 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 
         public override void Power()
         {
-            EatCorpse(fightManager.deadCharactersList[0]);
+            if (CurrentLife < MaximumLife) {
+                EatCorpse(fightManager.deadCharactersList[0]);
+            }
+            
         }
 
         public Zombie(string name)
@@ -49,7 +52,14 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
         }
 
         public void EatCorpse(Character c) {
-            this.CurrentLife += c.MaximumLife / 100;        
+            if (CurrentLife + c.MaximumLife / 100 > MaximumLife)
+            {
+                CurrentLife = MaximumLife;
+            }
+            else { 
+                this.CurrentLife += c.MaximumLife / 100;       
+            }
+             
         }
     }
 }
