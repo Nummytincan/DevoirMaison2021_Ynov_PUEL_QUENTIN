@@ -53,12 +53,15 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
          */
         public void Initiative()
         {
-            var rand = new Random().Next(1, 100);
-            var init = (1000 / AttackSpeed) - rand;           
+            
+            var init = (1000 / AttackSpeed) - RollDice();           
             this.Init = (int)init;
             
         }
-
+        public virtual int RollDice() {
+            var rand = new Random().Next(1, 100);
+            return rand;
+        }
         
 
         /**
@@ -74,13 +77,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
                 Console.WriteLine("Cible : {0}", target.Name);
                 Console.WriteLine("Vie : {0}", target.CurrentLife);
             }
-            else {
-                
-                Console.WriteLine("Avant Vie : {0}", CurrentLife);
-                GetCounteredFromTarget(target);
-                Console.WriteLine(" {0} se fait contre attaquer", Name);
-                Console.WriteLine("Vie : {0}", CurrentLife);
-            }
+            
         }
 
         private void GetCounteredFromTarget(Character target)
@@ -118,7 +115,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
          */
         public int MargeAttack(Character target)
         {
-            return  this.Attack - target.Defense ;
+            return  this.Attack - target.Defense + RollDice();
         }
         /**
          * Apply Damage on target current life
@@ -134,9 +131,9 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             //on cree une liste dans laquelle on stockera les cibles valides
             List<Character> validTarget = new List<Character>();
             
-            for (int i = 0; i < fightManager.charactersList.Count; i++)
+            for (int i = 0; i < fightManager.aliveCharactersList.Count; i++)
             {
-                Character currentCharacter = fightManager.charactersList[i];
+                Character currentCharacter = fightManager.aliveCharactersList[i];
                 //si le personnage testé n'est pas celui qui attaque et qu'il est vivant
                 if (currentCharacter != this && currentCharacter.CurrentLife > 0)
                 {

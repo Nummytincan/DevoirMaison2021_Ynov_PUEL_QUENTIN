@@ -45,5 +45,10 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             PowerSpeed = 0.5f;
             Rand = new Random();
         }
+        public override int RollDice()
+        {
+            return 50;
+        }
+        
     }
 }

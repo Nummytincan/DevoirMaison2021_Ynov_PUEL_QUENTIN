@@ -7,7 +7,8 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
 {
     public class FightManager
     {
-        public List<Character> charactersList = new List<Character>();
+        public List<Character> aliveCharactersList = new List<Character>();
+        public List<Character> deadCharactersList = new List<Character>();
         public int round = 0;
         public DateTime startTime;
         public int StartNumberFighter = 0;
@@ -17,7 +18,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
 
         public FightManager(List<Character> charactersList, int round = 0)
         {
-            this.charactersList = charactersList;
+            this.aliveCharactersList = charactersList;
             this.round = round;
             foreach (Character character in charactersList)
             {
@@ -29,7 +30,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
         {
             startTime = DateTime.Now;
             round = 1;
-            StartNumberFighter = charactersList.Count;
+            StartNumberFighter = aliveCharactersList.Count;
             //faire en sorte que les personnages ne soient pas blessé avant le début du combat
             //Reset des personnages
             ResetAll();
@@ -37,7 +38,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
             MyLog("----- Debut du combat -----");
             //a commenter pour enchainer les rounds à la main
             //faire des rounds tant qu'il y a plus d'un combattant vivant
-            while (charactersList.Count > 1)
+            while (aliveCharactersList.Count > 1)
             {
                 //commence le combat entre personnages
                 Fight();
@@ -76,10 +77,13 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
 
 
             //boucle pour chaque personnage
-            for (int i = PlayingPlayerIndex; i < charactersList.Count; i++) {
-                if (charactersList[i].CurrentLife > 0) {
+            for (int i = PlayingPlayerIndex; i < aliveCharactersList.Count; i++) {
+                if (aliveCharactersList[i].CurrentLife > 0) {
                     //select random target
-                    charactersList[i].SelectTargetAndAttack();
+                    aliveCharactersList[i].SelectTargetAndAttack();
+                    if (deadCharactersList.Count > 0 && aliveCharactersList[i] is Zombie) {
+                        aliveCharactersList[i].Power();
+                    }
                 }
             }
 
@@ -89,30 +93,31 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
             round++;
             MyLog("------------------FINAttack-------------------- ");
             MyLog("------------------Round "+round+"-------------------- ");
-            MyLog("------------------"+charactersList.Count+" -------------------- ");
+            MyLog("------------------"+aliveCharactersList.Count+" -------------------- ");
             PlayingPlayerIndex = -2;
         }
 
         private void DeadFlush()
         {
-            for (int i = charactersList.Count - 1; i >= 0; i--)
+            for (int i = aliveCharactersList.Count - 1; i >= 0; i--)
             {
-                Character currentPersonnage = charactersList[i];
+                Character currentPersonnage = aliveCharactersList[i];
                 if (currentPersonnage.CurrentLife <= 0)
                 {
-                    charactersList.Remove(currentPersonnage); 
+                    deadCharactersList.Add(currentPersonnage);
+                    aliveCharactersList.Remove(currentPersonnage); 
                 }
             }
         }
 
         private void OrderTabByInit()
         {
-            charactersList = charactersList.OrderByDescending(personnage => personnage.Init).ToList();
+            aliveCharactersList = aliveCharactersList.OrderByDescending(personnage => personnage.Init).ToList();
         }
 
         private void ComputeInit()
         {
-            foreach (Character p in charactersList) {
+            foreach (Character p in aliveCharactersList) {
                 p.Initiative();
                 MyLog(" "+ p.Name+" Initiative : " + p.Init);
             }
@@ -120,7 +125,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
 
         private void ResetAll()
         {
-            foreach(Character p in charactersList)
+            foreach(Character p in aliveCharactersList)
             {
                 p.Reset();
             }
@@ -129,11 +134,11 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Fight
         void ManageVictory()
         {
             fightEnded = true;
-            if (charactersList.Count == 1)
+            if (aliveCharactersList.Count == 1)
             {
-                MyLog(charactersList[0].Name + " remporte le battle royale");
+                MyLog(aliveCharactersList[0].Name + " remporte le battle royale");
             }
-            else if (charactersList.Count <= 0)
+            else if (aliveCharactersList.Count <= 0)
             {
                 MyLog("Tout le monde est mort, il n'y a pas de vainqueur");
             }

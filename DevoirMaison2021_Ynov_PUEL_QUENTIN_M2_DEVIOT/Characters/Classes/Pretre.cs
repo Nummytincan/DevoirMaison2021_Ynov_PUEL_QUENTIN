@@ -47,5 +47,17 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT.Characters.Classes
             PowerSpeed = 1.0f;
             Rand = new Random();
         }
+        public override void DealDamage(Character target)
+        {
+            if (target is IUndead)
+            {
+                target.CurrentLife -= MargeAttack(target) * Damages * 2 / 100;
+                //target.CurrentLife = MargeAttack(target) * Damages * 2 / 100;
+            }
+            else
+            {
+                base.DealDamage(target);
+            }
+        }
     }
 }

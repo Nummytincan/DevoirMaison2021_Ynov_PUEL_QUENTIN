@@ -32,7 +32,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 
         public override void Power()
         {
-            throw new NotImplementedException();
+            EatCorpse(fightManager.deadCharactersList[0]);
         }
 
         public Zombie(string name)
@@ -46,6 +46,10 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
             CurrentLife = 1500;
             PowerSpeed = 0.1f;
             Rand = new Random();
+        }
+
+        public void EatCorpse(Character c) {
+            this.CurrentLife += c.MaximumLife / 100;        
         }
     }
 }

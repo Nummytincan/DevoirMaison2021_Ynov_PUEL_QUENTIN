@@ -27,7 +27,7 @@ namespace DevoirMaison2021_Ynov_PUEL_QUENTIN_M2_DEVIOT
 
         public override void Passive()
         {
-            throw new NotImplementedException();
+            //TODO pas de délaie
         }
 
         public override void Power()
